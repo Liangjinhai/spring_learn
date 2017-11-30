@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.potato.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.potato.entity.User" >
+    <result column="USER_CODE" property="userCode" jdbcType="OTHER" />
+    <result column="USER_NAME" property="userName" jdbcType="OTHER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.potato.entity.User" >
+    insert into MYUSER (USER_CODE, USER_NAME)
+    values (#{userCode,jdbcType=OTHER}, #{userName,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.potato.entity.User" >
+    insert into MYUSER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userCode != null" >
+        USER_CODE,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userCode != null" >
+        #{userCode,jdbcType=OTHER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
